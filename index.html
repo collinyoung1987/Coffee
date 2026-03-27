@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Coffee Journal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white: #FFFFFF;
+      --off-white: #F7F5F2;
+      --cream: #EDE9E3;
+      --tan: #D4CBBC;
+      --warm-gray: #9E9388;
+      --mid: #6B6259;
+      --dark: #2C2520;
+      --espresso: #1A1410;
+      --accent: #8B6F5E;
+      --accent-light: #C4A882;
+      --green-ok: #4A7C59;
+      --red-no: #8B3A3A;
+      --blue-like: #4A6B8B;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--white);
+      color: var(--dark);
+      font-weight: 300;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--cream);
+      padding: 0 3rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--espresso);
+      letter-spacing: 0.02em;
+    }
+
+    .nav-logo em { font-style: italic; color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--espresso); }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 160px 3rem 100px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--warm-gray);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(52px, 8vw, 96px);
+      font-weight: 300;
+      line-height: 1.0;
+      color: var(--espresso);
+      letter-spacing: -0.01em;
+      margin-bottom: 2rem;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      font-size: 16px;
+      color: var(--warm-gray);
+      max-width: 420px;
+      font-weight: 300;
+    }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      background: var(--espresso);
+      color: var(--cream);
+      padding: 2.5rem 3rem;
+    }
+
+    .stats-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
+
+    .stat-item { border-left: 1px solid rgba(255,255,255,0.15); padding-left: 1.5rem; }
+    .stat-item:first-child { border-left: none; padding-left: 0; }
+
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 42px;
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--tan);
+      margin-top: 4px;
+    }
+
+    /* ── CURRENTLY BREWING ── */
+    .currently-section {
+      padding: 80px 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--warm-gray);
+      margin-bottom: 2rem;
+    }
+
+    .currently-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      background: var(--off-white);
+      padding: 3rem;
+      border-radius: 2px;
+    }
+
+    .currently-badge {
+      display: inline-block;
+      background: var(--espresso);
+      color: var(--cream);
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 1px;
+      margin-bottom: 1.5rem;
+    }
+
+    .currently-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 40px;
+      font-weight: 300;
+      line-height: 1.1;
+      color: var(--espresso);
+      margin-bottom: 0.5rem;
+    }
+
+    .currently-roaster {
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--warm-gray);
+      margin-bottom: 1.5rem;
+    }
+
+    .currently-notes-text {
+      font-size: 15px;
+      color: var(--mid);
+      font-style: italic;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 300;
+      line-height: 1.5;
+      margin-bottom: 1.5rem;
+    }
+
+    .brew-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    .brew-tag {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border: 1px solid var(--tan);
+      color: var(--mid);
+      border-radius: 1px;
+    }
+
+    .bag-placeholder-large {
+      width: 100%;
+      aspect-ratio: 3/4;
+      max-height: 340px;
+      background: var(--cream);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .bag-placeholder-large img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .bag-placeholder-large .bag-icon {
+      font-size: 64px;
+      opacity: 0.4;
+    }
+
+    /* ── FILTERS ── */
+    .filters-section {
+      padding: 60px 3rem 0;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .filters-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+      border-bottom: 1px solid var(--cream);
+      padding-bottom: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .filter-group { display: flex; gap: 6px; }
+
+    .filter-btn {
+      padding: 7px 16px;
+      border: 1px solid var(--cream);
+      background: transparent;
+      font-family: 'Jost', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      color: var(--mid);
+      cursor: pointer;
+      transition: all 0.2s;
+      border-radius: 1px;
+      text-transform: uppercase;
+    }
+
+    .filter-btn:hover { border-color: var(--tan); color: var(--dark); }
+    .filter-btn.active { background: var(--espresso); color: var(--white); border-color: var(--espresso); }
+
+    .filter-divider {
+      width: 1px;
+      height: 24px;
+      background: var(--cream);
+      margin: 0 0.5rem;
+    }
+
+    /* ── GRID ── */
+    .journal-section {
+      padding: 0 3rem 80px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .journal-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2px;
+    }
+
+    .coffee-card {
+      background: var(--white);
+      border: 1px solid var(--cream);
+      cursor: pointer;
+      transition: all 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .coffee-card:hover { border-color: var(--tan); z-index: 1; }
+    .coffee-card:hover .card-img-wrap { transform: scale(1.02); }
+
+    .card-img-wrap {
+      width: 100%;
+      height: 200px;
+      background: var(--off-white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      transition: transform 0.4s ease;
+    }
+
+    .card-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+    .card-emoji { font-size: 48px; opacity: 0.35; }
+
+    .card-body { padding: 1.25rem; }
+
+    .card-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.75rem;
+    }
+
+    .card-origin {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--warm-gray);
+    }
+
+    .verdict-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .verdict-dot.loved { background: var(--green-ok); }
+    .verdict-dot.liked { background: var(--blue-like); }
+    .verdict-dot.meh { background: var(--tan); }
+    .verdict-dot.nope { background: var(--red-no); }
+
+    .card-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--espresso);
+      line-height: 1.2;
+      margin-bottom: 3px;
+    }
+
+    .card-roaster {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--warm-gray);
+      margin-bottom: 1rem;
+    }
+
+    .card-tasting-notes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-bottom: 1rem;
+    }
+
+    .note-chip {
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      padding: 3px 9px;
+      background: var(--off-white);
+      color: var(--mid);
+      border-radius: 1px;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1rem;
+      border-top: 1px solid var(--cream);
+    }
+
+    .stars { color: var(--accent-light); font-size: 13px; letter-spacing: 2px; }
+
+    .card-brew-methods {
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      color: var(--warm-gray);
+      text-transform: uppercase;
+    }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(26, 20, 16, 0.7);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      backdrop-filter: blur(4px);
+    }
+
+    .modal-overlay.open { display: flex; }
+
+    .modal {
+      background: var(--white);
+      max-width: 780px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      border-radius: 2px;
+    }
+
+    .modal-header {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 0;
+    }
+
+    .modal-img {
+      width: 200px;
+      height: 240px;
+      background: var(--off-white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .modal-img img { width: 100%; height: 100%; object-fit: cover; }
+    .modal-img-emoji { font-size: 64px; opacity: 0.3; }
+
+    .modal-header-text {
+      padding: 2rem;
+      background: var(--espresso);
+      color: var(--cream);
+    }
+
+    .modal-origin-label {
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--tan);
+      margin-bottom: 0.75rem;
+    }
+
+    .modal-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px;
+      font-weight: 300;
+      line-height: 1.1;
+      color: var(--white);
+      margin-bottom: 0.25rem;
+    }
+
+    .modal-roaster {
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--tan);
+    }
+
+    .modal-body { padding: 2rem; }
+
+    .modal-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-field-label {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--warm-gray);
+      margin-bottom: 6px;
+    }
+
+    .modal-field-value {
+      font-size: 15px;
+      color: var(--dark);
+    }
+
+    .modal-notes-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 19px;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--mid);
+      line-height: 1.5;
+      padding: 1.5rem;
+      background: var(--off-white);
+      border-left: 3px solid var(--accent-light);
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-flavor-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-flavor-chip {
+      padding: 5px 14px;
+      border: 1px solid var(--tan);
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      color: var(--mid);
+      border-radius: 20px;
+    }
+
+    .modal-footer {
+      padding: 1.25rem 2rem;
+      border-top: 1px solid var(--cream);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .verdict-pill {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-weight: 400;
+    }
+
+    .verdict-pill.loved { background: #EAF3EE; color: var(--green-ok); }
+    .verdict-pill.liked { background: #EAF0F7; color: var(--blue-like); }
+    .verdict-pill.meh { background: var(--off-white); color: var(--warm-gray); }
+    .verdict-pill.nope { background: #F5EAEA; color: var(--red-no); }
+
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: var(--warm-gray);
+      cursor: pointer;
+      padding: 0.5rem;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+
+    .modal-close:hover { color: var(--espresso); }
+
+    /* ── WORLD MAP ── */
+    .map-section {
+      padding: 80px 3rem;
+      background: var(--off-white);
+    }
+
+    .map-inner { max-width: 1200px; margin: 0 auto; }
+
+    .map-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 3rem;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 36px;
+      font-weight: 300;
+      color: var(--espresso);
+    }
+
+    #world-map {
+      width: 100%;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    /* ── FLAVOR WHEEL ── */
+    .wheel-section {
+      padding: 80px 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .wheel-layout {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    #flavor-wheel-svg { width: 100%; max-width: 480px; }
+
+    .wheel-sidebar {}
+
+    .wheel-sidebar h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 300;
+      color: var(--espresso);
+      margin-bottom: 0.5rem;
+    }
+
+    .wheel-sidebar p {
+      font-size: 14px;
+      color: var(--warm-gray);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .selected-notes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 1.5rem;
+      min-height: 40px;
+    }
+
+    .selected-note {
+      padding: 5px 12px;
+      background: var(--espresso);
+      color: var(--cream);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    .selected-note:hover { background: var(--accent); }
+
+    .wheel-coffees h4 {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--warm-gray);
+      margin-bottom: 1rem;
+    }
+
+    .wheel-match {
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--cream);
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .wheel-match:hover { color: var(--accent); }
+
+    .wheel-match-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px;
+      color: var(--espresso);
+    }
+
+    .wheel-match-notes {
+      font-size: 12px;
+      color: var(--warm-gray);
+      margin-top: 2px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--espresso);
+      color: var(--tan);
+      padding: 3rem;
+      text-align: center;
+    }
+
+    footer p { font-size: 13px; letter-spacing: 0.06em; }
+    footer em { font-style: italic; color: var(--accent-light); }
+
+    /* ── UTILITY ── */
+    .hidden { display: none !important; }
+
+    @media (max-width: 768px) {
+      nav { padding: 0 1.5rem; }
+      .nav-links { display: none; }
+      .hero { padding: 120px 1.5rem 60px; }
+      .stats-inner { grid-template-columns: repeat(2, 1fr); }
+      .currently-card { grid-template-columns: 1fr; }
+      .filters-section, .journal-section { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .map-section { padding: 60px 1.5rem; }
+      .wheel-section { padding: 60px 1.5rem; }
+      .wheel-layout { grid-template-columns: 1fr; }
+      .modal-header { grid-template-columns: 1fr; }
+      .modal-img { width: 100%; height: 180px; }
+      .modal-row { grid-template-columns: 1fr; gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">my <em>coffee</em> journal</div>
+  <ul class="nav-links">
+    <li><a href="#journal">Journal</a></li>
+    <li><a href="#map">Origins</a></li>
+    <li><a href="#wheel">Flavor Wheel</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-eyebrow">A personal log</p>
+  <h1>Every bag,<br><em>remembered.</em></h1>
+  <p class="hero-sub">Tasting notes, origins, verdicts — a record of the coffees that have passed through the grinder.</p>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-num" id="stat-total">0</div>
+      <div class="stat-label">Coffees Tried</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num" id="stat-loved">0</div>
+      <div class="stat-label">Loved It</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num" id="stat-origins">0</div>
+      <div class="stat-label">Origins Explored</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num" id="stat-roasters">0</div>
+      <div class="stat-label">Roasters Tried</div>
+    </div>
+  </div>
+</div>
+
+<!-- CURRENTLY BREWING -->
+<section class="currently-section" id="currently">
+  <p class="section-label">In the grinder right now</p>
+  <div class="currently-card" id="currently-card">
+    <div>
+      <div class="currently-badge">Currently Brewing</div>
+      <div class="currently-name" id="c-name">—</div>
+      <div class="currently-roaster" id="c-roaster">—</div>
+      <div class="currently-notes-text" id="c-notes">—</div>
+      <div class="brew-tags" id="c-brew-tags"></div>
+    </div>
+    <div class="bag-placeholder-large" id="c-img">
+      <div class="bag-icon">☕</div>
+    </div>
+  </div>
+</section>
+
+<!-- FILTERS + JOURNAL GRID -->
+<section class="filters-section" id="journal">
+  <div class="filters-row">
+    <div class="filter-group" id="verdict-filters">
+      <button class="filter-btn active" data-filter="verdict" data-value="all">All</button>
+      <button class="filter-btn" data-filter="verdict" data-value="loved">Loved</button>
+      <button class="filter-btn" data-filter="verdict" data-value="liked">Liked</button>
+      <button class="filter-btn" data-filter="verdict" data-value="meh">Meh</button>
+      <button class="filter-btn" data-filter="verdict" data-value="nope">Nope</button>
+    </div>
+    <div class="filter-divider"></div>
+    <div class="filter-group" id="brew-filters">
+      <button class="filter-btn active" data-filter="brew" data-value="all">All Methods</button>
+    </div>
+  </div>
+</section>
+
+<section class="journal-section">
+  <div class="journal-grid" id="journal-grid"></div>
+</section>
+
+<!-- WORLD MAP -->
+<section class="map-section" id="map">
+  <div class="map-inner">
+    <div class="map-header">
+      <div>
+        <p class="section-label">Origins explored</p>
+        <div class="section-title">Where the beans<br>come from</div>
+      </div>
+    </div>
+    <div id="world-map"></div>
+  </div>
+</section>
+
+<!-- FLAVOR WHEEL -->
+<section class="wheel-section" id="wheel">
+  <p class="section-label">Flavor explorer</p>
+  <div style="margin-bottom:2rem;">
+    <div class="section-title">Find coffees by<br>flavor profile</div>
+  </div>
+  <div class="wheel-layout">
+    <div>
+      <svg id="flavor-wheel-svg" viewBox="0 0 480 480" xmlns="http://www.w3.org/2000/svg"></svg>
+    </div>
+    <div class="wheel-sidebar">
+      <h3>Selected Notes</h3>
+      <p>Click slices on the wheel to filter your journal by tasting note.</p>
+      <div class="selected-notes" id="selected-notes">
+        <span style="font-size:13px;color:var(--warm-gray);align-self:center;">Nothing selected yet</span>
+      </div>
+      <div class="wheel-coffees">
+        <h4>Matching Coffees</h4>
+        <div id="wheel-matches"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal" onclick="closeModal(event)">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-img" id="modal-img">
+        <div class="modal-img-emoji">☕</div>
+      </div>
+      <div class="modal-header-text">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+          <div>
+            <div class="modal-origin-label" id="modal-origin">—</div>
+            <div class="modal-name" id="modal-name">—</div>
+            <div class="modal-roaster" id="modal-roaster">—</div>
+          </div>
+          <button class="modal-close" onclick="document.getElementById('modal').classList.remove('open')">×</button>
+        </div>
+      </div>
+    </div>
+    <div class="modal-body">
+      <div class="modal-notes-text" id="modal-roaster-notes">—</div>
+      <div class="modal-row">
+        <div>
+          <div class="modal-field-label">Process</div>
+          <div class="modal-field-value" id="modal-process">—</div>
+        </div>
+        <div>
+          <div class="modal-field-label">Roast Level</div>
+          <div class="modal-field-value" id="modal-roast">—</div>
+        </div>
+        <div>
+          <div class="modal-field-label">Brew Methods</div>
+          <div class="modal-field-value" id="modal-brew">—</div>
+        </div>
+        <div>
+          <div class="modal-field-label">Price Paid</div>
+          <div class="modal-field-value" id="modal-price">—</div>
+        </div>
+      </div>
+      <div class="modal-field-label" style="margin-bottom:8px;">Tasting Notes</div>
+      <div class="modal-flavor-chips" id="modal-chips"></div>
+      <div class="modal-field-label" style="margin-bottom:8px;">My Notes</div>
+      <div style="font-size:14px;color:var(--mid);line-height:1.7;" id="modal-my-notes">—</div>
+    </div>
+    <div class="modal-footer">
+      <div>
+        <span class="verdict-pill" id="modal-verdict-pill">—</span>
+        <span style="margin-left:12px;font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--accent-light);" id="modal-stars">—</span>
+      </div>
+      <div style="font-size:11px;letter-spacing:0.08em;color:var(--warm-gray);text-transform:uppercase;" id="modal-date">—</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>my <em>coffee journal</em> &nbsp;·&nbsp; kept with care &nbsp;·&nbsp; <span id="footer-year"></span></p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<script>
+// ── DATA ──
+let allCoffees = [];
+let activeVerdictFilter = 'all';
+let activeBrewFilter = 'all';
+
+async function loadData() {
+  try {
+    const res = await fetch('coffees.json');
+    allCoffees = await res.json();
+  } catch(e) {
+    // fallback sample data if fetch fails (e.g. local file open)
+    allCoffees = [
+      { id:1, name:"Yirgacheffe Natural", roaster:"Onyx Coffee Lab", origin:"Ethiopia", region:"Yirgacheffe", lat:6.15, lng:38.2, process:"Natural", roastLevel:"Light", brewMethods:["Pour Over","AeroPress"], rating:5, verdict:"loved", wouldBuyAgain:true, price:22, tastingNotes:["Blueberry","Dark Chocolate","Jasmine","Stone Fruit"], roasterNotes:"Expect a fruit-forward, wine-like cup with incredible complexity.", dateAdded:"2025-03-10", currentlyBrewing:true, bagPhotoUrl:"", notes:"My favorite so far." },
+      { id:2, name:"Huila Washed", roaster:"Intelligentsia", origin:"Colombia", region:"Huila", lat:2.53, lng:-75.53, process:"Washed", roastLevel:"Medium-Light", brewMethods:["Drip","Pour Over"], rating:4, verdict:"liked", wouldBuyAgain:true, price:18, tastingNotes:["Brown Sugar","Red Apple","Citrus","Caramel"], roasterNotes:"Bright and balanced with a smooth, sweet finish.", dateAdded:"2025-02-14", currentlyBrewing:false, bagPhotoUrl:"", notes:"Great morning coffee." },
+      { id:3, name:"Sumatra Mandheling", roaster:"Stumptown", origin:"Indonesia", region:"North Sumatra", lat:2.0, lng:99.5, process:"Wet-Hulled", roastLevel:"Dark", brewMethods:["French Press","Drip"], rating:2, verdict:"nope", wouldBuyAgain:false, price:16, tastingNotes:["Earthy","Cedar","Herbal","Dark Chocolate"], roasterNotes:"Full-bodied and earthy with low acidity.", dateAdded:"2025-01-20", currentlyBrewing:false, bagPhotoUrl:"", notes:"Too heavy for my taste." },
+      { id:4, name:"Kenya AA Kirinyaga", roaster:"Blue Bottle", origin:"Kenya", region:"Kirinyaga", lat:-0.5, lng:37.3, process:"Washed", roastLevel:"Light", brewMethods:["Pour Over","Chemex"], rating:5, verdict:"loved", wouldBuyAgain:true, price:24, tastingNotes:["Blackcurrant","Tomato","Bergamot","Grapefruit"], roasterNotes:"Savory and bright with a distinctive tomato-like acidity.", dateAdded:"2025-01-05", currentlyBrewing:false, bagPhotoUrl:"", notes:"Totally unexpected." },
+      { id:5, name:"Guatemala Huehuetenango", roaster:"Counter Culture", origin:"Guatemala", region:"Huehuetenango", lat:15.3, lng:-91.47, process:"Washed", roastLevel:"Medium", brewMethods:["Drip","Pour Over","French Press"], rating:4, verdict:"loved", wouldBuyAgain:true, price:19, tastingNotes:["Milk Chocolate","Hazelnut","Stone Fruit","Caramel"], roasterNotes:"Approachable and comforting with a rich, chocolatey body.", dateAdded:"2024-12-18", currentlyBrewing:false, bagPhotoUrl:"", notes:"A crowd-pleaser." }
+    ];
+  }
+  init();
+}
+
+function init() {
+  renderStats();
+  renderCurrentlyBrewing();
+  renderBrewFilters();
+  renderGrid();
+  renderMap();
+  renderFlavorWheel();
+  document.getElementById('footer-year').textContent = new Date().getFullYear();
+}
+
+// ── STATS ──
+function renderStats() {
+  document.getElementById('stat-total').textContent = allCoffees.length;
+  document.getElementById('stat-loved').textContent = allCoffees.filter(c => c.verdict === 'loved').length;
+  document.getElementById('stat-origins').textContent = new Set(allCoffees.map(c => c.origin)).size;
+  document.getElementById('stat-roasters').textContent = new Set(allCoffees.map(c => c.roaster)).size;
+}
+
+// ── CURRENTLY BREWING ──
+function renderCurrentlyBrewing() {
+  const c = allCoffees.find(c => c.currentlyBrewing);
+  if (!c) { document.querySelector('.currently-section').classList.add('hidden'); return; }
+  document.getElementById('c-name').textContent = c.name;
+  document.getElementById('c-roaster').textContent = c.roaster + ' · ' + c.origin;
+  document.getElementById('c-notes').textContent = '"' + c.roasterNotes + '"';
+  const tags = document.getElementById('c-brew-tags');
+  tags.innerHTML = c.brewMethods.map(m => `<span class="brew-tag">${m}</span>`).join('');
+  if (c.bagPhotoUrl) {
+    document.getElementById('c-img').innerHTML = `<img src="${c.bagPhotoUrl}" alt="${c.name}" />`;
+  }
+}
+
+// ── BREW FILTER BUTTONS ──
+function renderBrewFilters() {
+  const methods = [...new Set(allCoffees.flatMap(c => c.brewMethods))].sort();
+  const container = document.getElementById('brew-filters');
+  methods.forEach(m => {
+    const btn = document.createElement('button');
+    btn.className = 'filter-btn';
+    btn.dataset.filter = 'brew';
+    btn.dataset.value = m;
+    btn.textContent = m;
+    container.appendChild(btn);
+  });
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const type = btn.dataset.filter;
+      const val = btn.dataset.value;
+      if (type === 'verdict') {
+        activeVerdictFilter = val;
+        document.querySelectorAll('[data-filter="verdict"]').forEach(b => b.classList.remove('active'));
+      } else {
+        activeBrewFilter = val;
+        document.querySelectorAll('[data-filter="brew"]').forEach(b => b.classList.remove('active'));
+      }
+      btn.classList.add('active');
+      renderGrid();
+    });
+  });
+}
+
+// ── GRID ──
+function getFiltered() {
+  return allCoffees.filter(c => {
+    const vOk = activeVerdictFilter === 'all' || c.verdict === activeVerdictFilter;
+    const bOk = activeBrewFilter === 'all' || c.brewMethods.includes(activeBrewFilter);
+    return vOk && bOk;
+  });
+}
+
+function stars(n) {
+  return '★'.repeat(n) + '☆'.repeat(5-n);
+}
+
+function renderGrid() {
+  const grid = document.getElementById('journal-grid');
+  const data = getFiltered();
+  if (data.length === 0) {
+    grid.innerHTML = `<div style="grid-column:1/-1;padding:4rem 0;text-align:center;color:var(--warm-gray);font-size:15px;">No coffees match this filter.</div>`;
+    return;
+  }
+  grid.innerHTML = data.map(c => `
+    <div class="coffee-card" onclick="openModal(${c.id})">
+      <div class="card-img-wrap">
+        ${c.bagPhotoUrl
+          ? `<img src="${c.bagPhotoUrl}" alt="${c.name}" />`
+          : `<div class="card-emoji">☕</div>`}
+      </div>
+      <div class="card-body">
+        <div class="card-meta">
+          <div class="card-origin">${c.origin} · ${c.region}</div>
+          <div class="verdict-dot ${c.verdict}"></div>
+        </div>
+        <div class="card-name">${c.name}</div>
+        <div class="card-roaster">${c.roaster}</div>
+        <div class="card-tasting-notes">
+          ${c.tastingNotes.slice(0,3).map(n => `<span class="note-chip">${n}</span>`).join('')}
+        </div>
+        <div class="card-footer">
+          <div class="stars">${stars(c.rating)}</div>
+          <div class="card-brew-methods">${c.brewMethods[0]}</div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ── MODAL ──
+function openModal(id) {
+  const c = allCoffees.find(c => c.id === id);
+  if (!c) return;
+  document.getElementById('modal-origin').textContent = c.origin + ' · ' + c.region;
+  document.getElementById('modal-name').textContent = c.name;
+  document.getElementById('modal-roaster').textContent = c.roaster;
+  document.getElementById('modal-roaster-notes').textContent = '"' + c.roasterNotes + '"';
+  document.getElementById('modal-process').textContent = c.process;
+  document.getElementById('modal-roast').textContent = c.roastLevel;
+  document.getElementById('modal-brew').textContent = c.brewMethods.join(', ');
+  document.getElementById('modal-price').textContent = c.price ? '$' + c.price : '—';
+  document.getElementById('modal-my-notes').textContent = c.notes || '—';
+  document.getElementById('modal-date').textContent = c.dateAdded;
+  const vp = document.getElementById('modal-verdict-pill');
+  vp.textContent = c.verdict;
+  vp.className = 'verdict-pill ' + c.verdict;
+  document.getElementById('modal-stars').textContent = stars(c.rating);
+  document.getElementById('modal-chips').innerHTML = c.tastingNotes.map(n => `<span class="modal-flavor-chip">${n}</span>`).join('');
+  const mi = document.getElementById('modal-img');
+  mi.innerHTML = c.bagPhotoUrl ? `<img src="${c.bagPhotoUrl}" alt="${c.name}" />` : `<div class="modal-img-emoji">☕</div>`;
+  document.getElementById('modal').classList.add('open');
+}
+
+function closeModal(e) {
+  if (e.target.id === 'modal') document.getElementById('modal').classList.remove('open');
+}
+
+// ── MAP ──
+function renderMap() {
+  const w = document.getElementById('world-map').offsetWidth || 900;
+  const h = Math.round(w * 0.52);
+  const svg = d3.select('#world-map').append('svg')
+    .attr('width', '100%')
+    .attr('viewBox', `0 0 ${w} ${h}`)
+    .style('background', '#EDE9E3');
+
+  const projection = d3.geoNaturalEarth1()
+    .scale(w / 6.2)
+    .translate([w / 2, h / 2]);
+
+  const path = d3.geoPath().projection(projection);
+
+  d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(world => {
+    const countries = topojson.feature(world, world.objects.countries);
+    svg.append('g').selectAll('path')
+      .data(countries.features)
+      .join('path')
+      .attr('d', path)
+      .attr('fill', '#D4CBBC')
+      .attr('stroke', '#EDE9E3')
+      .attr('stroke-width', 0.5);
+
+    // Plot coffee origins
+    allCoffees.forEach(c => {
+      const [x, y] = projection([c.lng, c.lat]);
+      const g = svg.append('g').style('cursor', 'pointer').on('click', () => openModal(c.id));
+      g.append('circle').attr('cx', x).attr('cy', y).attr('r', 10)
+        .attr('fill', c.verdict === 'loved' ? '#4A7C59' : c.verdict === 'liked' ? '#4A6B8B' : c.verdict === 'meh' ? '#9E9388' : '#8B3A3A')
+        .attr('stroke', 'white').attr('stroke-width', 2).attr('opacity', 0.9);
+      g.append('text').attr('x', x).attr('y', y - 15)
+        .attr('text-anchor', 'middle')
+        .attr('font-family', 'Jost, sans-serif')
+        .attr('font-size', '11px')
+        .attr('fill', '#2C2520')
+        .text(c.origin);
+    });
+
+    // Legend
+    const legData = [{label:'Loved', color:'#4A7C59'},{label:'Liked', color:'#4A6B8B'},{label:'Meh', color:'#9E9388'},{label:'Nope', color:'#8B3A3A'}];
+    const leg = svg.append('g').attr('transform', `translate(16, ${h - 80})`);
+    legData.forEach((d, i) => {
+      leg.append('circle').attr('cx', 8).attr('cy', i * 18).attr('r', 5).attr('fill', d.color);
+      leg.append('text').attr('x', 20).attr('y', i * 18 + 4).attr('font-family', 'Jost, sans-serif').attr('font-size', '11px').attr('fill', '#6B6259').text(d.label);
+    });
+  }).catch(() => {
+    document.getElementById('world-map').innerHTML = '<p style="padding:2rem;color:var(--warm-gray);text-align:center;font-size:14px;">Map requires an internet connection to load.</p>';
+  });
+}
+
+// ── FLAVOR WHEEL ──
+const flavorCategories = [
+  { name: 'Fruity', color: '#C4834A', sub: ['Blueberry', 'Blackcurrant', 'Red Apple', 'Stone Fruit', 'Citrus', 'Grapefruit'] },
+  { name: 'Floral', color: '#8B6F5E', sub: ['Jasmine', 'Bergamot', 'Rose', 'Lavender'] },
+  { name: 'Sweet', color: '#B5854A', sub: ['Brown Sugar', 'Caramel', 'Honey', 'Vanilla'] },
+  { name: 'Nutty', color: '#7A6050', sub: ['Hazelnut', 'Almond', 'Walnut', 'Pecan'] },
+  { name: 'Chocolate', color: '#5C4033', sub: ['Dark Chocolate', 'Milk Chocolate', 'Cocoa', 'Mocha'] },
+  { name: 'Earthy', color: '#6B7A5C', sub: ['Earthy', 'Cedar', 'Herbal', 'Tomato'] },
+  { name: 'Spice', color: '#8B7355', sub: ['Cinnamon', 'Clove', 'Pepper', 'Cardamom'] },
+];
+
+let selectedNotes = new Set();
+
+function renderFlavorWheel() {
+  const svg = d3.select('#flavor-wheel-svg');
+  const size = 480;
+  const cx = size / 2, cy = size / 2;
+  const outerR = 210, innerR = 80;
+  const midR = (outerR + innerR) / 2;
+  const n = flavorCategories.length;
+
+  flavorCategories.forEach((cat, i) => {
+    const catStart = (i / n) * 2 * Math.PI - Math.PI / 2;
+    const catEnd = ((i + 1) / n) * 2 * Math.PI - Math.PI / 2;
+    const subN = cat.sub.length;
+
+    // Outer sub-slices
+    cat.sub.forEach((note, j) => {
+      const a0 = catStart + (j / subN) * (catEnd - catStart);
+      const a1 = catStart + ((j + 1) / subN) * (catEnd - catStart);
+      const arc = d3.arc().innerRadius(midR).outerRadius(outerR).startAngle(a0).endAngle(a1).padAngle(0.012).cornerRadius(2);
+      const g = svg.append('g').style('cursor', 'pointer');
+      g.append('path').attr('d', arc).attr('transform', `translate(${cx},${cy})`)
+        .attr('fill', cat.color).attr('opacity', 0.65)
+        .attr('data-note', note)
+        .attr('class', 'sub-slice');
+
+      const mid = (a0 + a1) / 2;
+      const tr = (midR + outerR) / 2;
+      svg.append('text')
+        .attr('x', cx + tr * Math.sin(mid))
+        .attr('y', cy - tr * Math.cos(mid))
+        .attr('text-anchor', 'middle').attr('dominant-baseline', 'middle')
+        .attr('font-family', 'Jost, sans-serif').attr('font-size', '9px')
+        .attr('fill', 'white').attr('pointer-events', 'none')
+        .text(note);
+
+      g.on('click', () => toggleNote(note, g, cat.color));
+    });
+
+    // Inner category arc
+    const arc2 = d3.arc().innerRadius(innerR).outerRadius(midR - 4).startAngle(catStart).endAngle(catEnd).padAngle(0.016).cornerRadius(2);
+    svg.append('path').attr('d', arc2).attr('transform', `translate(${cx},${cy})`).attr('fill', cat.color).attr('opacity', 0.9);
+
+    const midA = (catStart + catEnd) / 2;
+    const tr2 = (innerR + midR) / 2;
+    svg.append('text')
+      .attr('x', cx + tr2 * Math.sin(midA))
+      .attr('y', cy - tr2 * Math.cos(midA))
+      .attr('text-anchor', 'middle').attr('dominant-baseline', 'middle')
+      .attr('font-family', 'Cormorant Garamond, serif').attr('font-size', '11px').attr('font-weight', '400')
+      .attr('fill', 'white').attr('pointer-events', 'none')
+      .text(cat.name);
+  });
+
+  // Center circle
+  svg.append('circle').attr('cx', cx).attr('cy', cy).attr('r', innerR - 4).attr('fill', '#EDE9E3');
+  svg.append('text').attr('x', cx).attr('y', cy - 8).attr('text-anchor', 'middle')
+    .attr('font-family', 'Cormorant Garamond, serif').attr('font-size', '15px').attr('fill', '#6B6259').text('tap to');
+  svg.append('text').attr('x', cx).attr('y', cy + 10).attr('text-anchor', 'middle')
+    .attr('font-family', 'Cormorant Garamond, serif').attr('font-size', '15px').attr('fill', '#6B6259').text('explore');
+}
+
+function toggleNote(note, g, color) {
+  if (selectedNotes.has(note)) {
+    selectedNotes.delete(note);
+    g.select('path').attr('opacity', 0.65).attr('stroke', 'none');
+  } else {
+    selectedNotes.add(note);
+    g.select('path').attr('opacity', 1).attr('stroke', 'white').attr('stroke-width', 2);
+  }
+  updateWheelSidebar();
+}
+
+function updateWheelSidebar() {
+  const container = document.getElementById('selected-notes');
+  if (selectedNotes.size === 0) {
+    container.innerHTML = '<span style="font-size:13px;color:var(--warm-gray);align-self:center;">Nothing selected yet</span>';
+    document.getElementById('wheel-matches').innerHTML = '';
+    return;
+  }
+  container.innerHTML = [...selectedNotes].map(n =>
+    `<span class="selected-note" onclick="removeNote('${n}')">${n} ×</span>`
+  ).join('');
+
+  const matches = allCoffees.filter(c => c.tastingNotes.some(n => selectedNotes.has(n)));
+  const matchEl = document.getElementById('wheel-matches');
+  if (matches.length === 0) {
+    matchEl.innerHTML = '<p style="font-size:13px;color:var(--warm-gray);">No matches in your journal.</p>';
+  } else {
+    matchEl.innerHTML = matches.map(c => `
+      <div class="wheel-match" onclick="openModal(${c.id})">
+        <div class="wheel-match-name">${c.name}</div>
+        <div class="wheel-match-notes">${c.tastingNotes.filter(n => selectedNotes.has(n)).join(', ')}</div>
+      </div>
+    `).join('');
+  }
+}
+
+function removeNote(note) {
+  selectedNotes.delete(note);
+  // Reset that slice visually
+  d3.selectAll('.sub-slice').filter(function() {
+    return d3.select(this).attr('data-note') === note;
+  }).attr('opacity', 0.65).attr('stroke', 'none');
+  updateWheelSidebar();
+}
+
+// ── TOPOJSON (for map) ──
+const topoScript = document.createElement('script');
+topoScript.src = 'https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js';
+topoScript.onload = () => {};
+document.head.appendChild(topoScript);
+
+// ── INIT ──
+loadData();
+</script>
+</body>
+</html>
