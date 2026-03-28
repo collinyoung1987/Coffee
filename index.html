@@ -29,7 +29,7 @@
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Jost', sans-serif;
+      font-family: 'Jost', sans-sans-serif;
       background: var(--white);
       color: var(--dark);
       font-weight: 300;
@@ -53,7 +53,7 @@
     }
 
     .nav-logo {
-      font-family: 'open sans', serif;
+      font-family: 'open sans', sans-serif;
       font-size: 22px;
       font-weight: 400;
       color: var(--espresso);
@@ -95,7 +95,7 @@
     }
 
     .hero h1 {
-      font-family: 'open sans', serif;
+      font-family: 'open sans', sans-serif;
       font-size: clamp(52px, 8vw, 96px);
       font-weight: 300;
       line-height: 1.0;
@@ -135,7 +135,7 @@
     .stat-item:first-child { border-left: none; padding-left: 0; }
 
     .stat-num {
-      font-family: 'open sans', serif;
+      font-family: 'open sans', sans-serif;
       font-size: 42px;
       font-weight: 300;
       color: var(--white);
@@ -188,7 +188,7 @@
     }
 
     .currently-name {
-      font-family: 'open sans', serif;
+      font-family: 'open sans', sans-serif;
       font-size: 40px;
       font-weight: 300;
       line-height: 1.1;
@@ -208,7 +208,7 @@
       font-size: 15px;
       color: var(--mid);
       font-style: italic;
-      font-family: 'open sans', serif;
+      font-family: 'open sans', sans-serif;
       font-size: 20px;
       font-weight: 300;
       line-height: 1.5;
@@ -273,7 +273,7 @@
       padding: 7px 16px;
       border: 1px solid var(--cream);
       background: transparent;
-      font-family: 'Jost', sans-serif;
+      font-family: 'Jost', sans-sans-serif;
       font-size: 12px;
       letter-spacing: 0.08em;
       color: var(--mid);
@@ -362,7 +362,7 @@
     .verdict-dot.nope { background: var(--red-no); }
 
     .card-name {
-      font-family: 'open sans', serif;
+      font-family: 'open sans', sans-serif;
       font-size: 22px;
       font-weight: 400;
       color: var(--espresso);
@@ -470,7 +470,7 @@
     }
 
     .modal-name {
-      font-family: 'open sans', serif;
+      font-family: 'open sans', sans-serif;
       font-size: 32px;
       font-weight: 300;
       line-height: 1.1;
@@ -508,7 +508,7 @@
     }
 
     .modal-notes-text {
-      font-family: 'open sans', serif;
+      font-family: 'open sans', sans-serif;
       font-size: 19px;
       font-weight: 300;
       font-style: italic;
@@ -587,7 +587,7 @@
     }
 
     .section-title {
-      font-family: 'open sans', serif;
+      font-family: 'open sans', sans-serif;
       font-size: 36px;
       font-weight: 300;
       color: var(--espresso);
@@ -618,7 +618,7 @@
     .wheel-sidebar {}
 
     .wheel-sidebar h3 {
-      font-family: 'open sans', serif;
+      font-family: 'open sans', sans-serif;
       font-size: 28px;
       font-weight: 300;
       color: var(--espresso);
@@ -673,7 +673,7 @@
     .wheel-match:hover { color: var(--accent); }
 
     .wheel-match-name {
-      font-family: 'open sans', serif;
+      font-family: 'open sans', sans-serif;
       font-size: 17px;
       color: var(--espresso);
     }
@@ -876,7 +876,7 @@
     <div class="modal-footer">
       <div>
         <span class="verdict-pill" id="modal-verdict-pill">—</span>
-        <span style="margin-left:12px;font-family:'open sans',serif;font-size:18px;color:var(--accent-light);" id="modal-stars">—</span>
+        <span style="margin-left:12px;font-family:'open sans',sans-serif;font-size:18px;color:var(--accent-light);" id="modal-stars">—</span>
       </div>
       <div style="font-size:11px;letter-spacing:0.08em;color:var(--warm-gray);text-transform:uppercase;" id="modal-date">—</div>
     </div>
@@ -1081,7 +1081,7 @@ function renderMap() {
         .attr('stroke', 'white').attr('stroke-width', 2).attr('opacity', 0.9);
       g.append('text').attr('x', x).attr('y', y - 15)
         .attr('text-anchor', 'middle')
-        .attr('font-family', 'Jost, sans-serif')
+        .attr('font-family', 'Jost, sans-sans-serif')
         .attr('font-size', '11px')
         .attr('fill', '#2C2520')
         .text(c.origin);
@@ -1092,7 +1092,7 @@ function renderMap() {
     const leg = svg.append('g').attr('transform', `translate(16, ${h - 80})`);
     legData.forEach((d, i) => {
       leg.append('circle').attr('cx', 8).attr('cy', i * 18).attr('r', 5).attr('fill', d.color);
-      leg.append('text').attr('x', 20).attr('y', i * 18 + 4).attr('font-family', 'Jost, sans-serif').attr('font-size', '11px').attr('fill', '#6B6259').text(d.label);
+      leg.append('text').attr('x', 20).attr('y', i * 18 + 4).attr('font-family', 'Jost, sans-sans-serif').attr('font-size', '11px').attr('fill', '#6B6259').text(d.label);
     });
   }).catch(() => {
     document.getElementById('world-map').innerHTML = '<p style="padding:2rem;color:var(--warm-gray);text-align:center;font-size:14px;">Map requires an internet connection to load.</p>';
@@ -1142,7 +1142,7 @@ function renderFlavorWheel() {
         .attr('x', cx + tr * Math.sin(mid))
         .attr('y', cy - tr * Math.cos(mid))
         .attr('text-anchor', 'middle').attr('dominant-baseline', 'middle')
-        .attr('font-family', 'Jost, sans-serif').attr('font-size', '9px')
+        .attr('font-family', 'Jost, sans-sans-serif').attr('font-size', '9px')
         .attr('fill', 'white').attr('pointer-events', 'none')
         .text(note);
 
@@ -1159,7 +1159,7 @@ function renderFlavorWheel() {
       .attr('x', cx + tr2 * Math.sin(midA))
       .attr('y', cy - tr2 * Math.cos(midA))
       .attr('text-anchor', 'middle').attr('dominant-baseline', 'middle')
-      .attr('font-family', 'open sans, serif').attr('font-size', '11px').attr('font-weight', '400')
+      .attr('font-family', 'open sans, sans-serif').attr('font-size', '11px').attr('font-weight', '400')
       .attr('fill', 'white').attr('pointer-events', 'none')
       .text(cat.name);
   });
@@ -1167,9 +1167,9 @@ function renderFlavorWheel() {
   // Center circle
   svg.append('circle').attr('cx', cx).attr('cy', cy).attr('r', innerR - 4).attr('fill', '#EDE9E3');
   svg.append('text').attr('x', cx).attr('y', cy - 8).attr('text-anchor', 'middle')
-    .attr('font-family', 'open sans, serif').attr('font-size', '15px').attr('fill', '#6B6259').text('tap to');
+    .attr('font-family', 'open sans, sans-serif').attr('font-size', '15px').attr('fill', '#6B6259').text('tap to');
   svg.append('text').attr('x', cx).attr('y', cy + 10).attr('text-anchor', 'middle')
-    .attr('font-family', 'open sans, serif').attr('font-size', '15px').attr('fill', '#6B6259').text('explore');
+    .attr('font-family', 'open sans, sans-serif').attr('font-size', '15px').attr('fill', '#6B6259').text('explore');
 }
 
 function toggleNote(note, g, color) {
