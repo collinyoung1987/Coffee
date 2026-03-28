@@ -6,33 +6,35 @@
   <title>My Coffee Journal</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --white: #FFFFFF;
-      --off-white: #F7F5F2;
-      --cream: #EDE9E3;
-      --tan: #D4CBBC;
-      --warm-gray: #9E9388;
-      --mid: #6B6259;
-      --dark: #2C2520;
-      --espresso: #1A1410;
-      --accent: #8B6F5E;
-      --accent-light: #C4A882;
-      --green-ok: #4A7C59;
-      --red-no: #8B3A3A;
-      --blue-like: #4A6B8B;
+      --pink:    #EF476F;
+      --yellow:  #FFD166;
+      --teal:    #06D6A0;
+      --blue:    #118AB2;
+      --navy:    #073B4C;
+      --white:   #FFFFFF;
+      --light:   #F4FAFC;
+      --muted:   #5A7A87;
+      --border:  #DCE9EE;
+
+      /* verdict colors */
+      --loved:   #06D6A0;
+      --liked:   #118AB2;
+      --meh:     #FFD166;
+      --nope:    #EF476F;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Jost', sans-sans-serif;
+      font-family: 'Open Sans', sans-serif;
       background: var(--white);
-      color: var(--dark);
-      font-weight: 300;
+      color: var(--navy);
+      font-weight: 400;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
@@ -42,85 +44,104 @@
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 100;
-      background: rgba(255,255,255,0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--cream);
+      background: var(--navy);
       padding: 0 3rem;
-      height: 64px;
+      height: 60px;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
 
     .nav-logo {
-      font-family: 'open sans', sans-serif;
-      font-size: 22px;
-      font-weight: 400;
-      color: var(--espresso);
-      letter-spacing: 0.02em;
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -0.02em;
     }
 
-    .nav-logo em { font-style: italic; color: var(--accent); }
+    .nav-logo span { color: var(--yellow); }
 
     .nav-links {
       display: flex;
-      gap: 2.5rem;
+      gap: 2rem;
       list-style: none;
     }
 
     .nav-links a {
       font-size: 12px;
-      letter-spacing: 0.12em;
+      font-weight: 600;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--mid);
+      color: rgba(255,255,255,0.6);
       text-decoration: none;
       transition: color 0.2s;
     }
 
-    .nav-links a:hover { color: var(--espresso); }
+    .nav-links a:hover { color: var(--yellow); }
 
     /* ── HERO ── */
     .hero {
-      padding: 160px 3rem 100px;
+      background: var(--navy);
+      padding: 120px 3rem 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: '☕';
+      position: absolute;
+      right: 3rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 200px;
+      opacity: 0.06;
+      pointer-events: none;
+    }
+
+    .hero-inner {
       max-width: 1200px;
       margin: 0 auto;
+      position: relative;
+      z-index: 1;
     }
 
     .hero-eyebrow {
+      display: inline-block;
+      background: var(--pink);
+      color: var(--white);
       font-size: 11px;
-      letter-spacing: 0.18em;
+      font-weight: 700;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--warm-gray);
+      padding: 5px 14px;
+      border-radius: 20px;
       margin-bottom: 1.5rem;
     }
 
     .hero h1 {
-      font-family: 'open sans', sans-serif;
-      font-size: clamp(52px, 8vw, 96px);
-      font-weight: 300;
+      font-size: clamp(44px, 7vw, 84px);
+      font-weight: 800;
       line-height: 1.0;
-      color: var(--espresso);
-      letter-spacing: -0.01em;
-      margin-bottom: 2rem;
+      color: var(--white);
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
     }
 
-    .hero h1 em {
-      font-style: italic;
-      color: var(--accent);
-    }
+    .hero h1 .accent { color: var(--yellow); }
+    .hero h1 .accent2 { color: var(--teal); }
 
     .hero-sub {
       font-size: 16px;
-      color: var(--warm-gray);
-      max-width: 420px;
+      color: rgba(255,255,255,0.55);
+      max-width: 480px;
       font-weight: 300;
+      line-height: 1.7;
     }
 
     /* ── STATS BAR ── */
     .stats-bar {
-      background: var(--espresso);
-      color: var(--cream);
-      padding: 2.5rem 3rem;
+      background: var(--yellow);
+      padding: 2rem 3rem;
     }
 
     .stats-inner {
@@ -128,170 +149,218 @@
       margin: 0 auto;
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 2rem;
+      gap: 1rem;
     }
 
-    .stat-item { border-left: 1px solid rgba(255,255,255,0.15); padding-left: 1.5rem; }
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      border-left: 2px solid rgba(7,59,76,0.2);
+      padding-left: 1.5rem;
+    }
+
     .stat-item:first-child { border-left: none; padding-left: 0; }
 
     .stat-num {
-      font-family: 'open sans', sans-serif;
-      font-size: 42px;
-      font-weight: 300;
-      color: var(--white);
+      font-size: 40px;
+      font-weight: 800;
+      color: var(--navy);
       line-height: 1;
+      letter-spacing: -0.03em;
     }
 
     .stat-label {
       font-size: 11px;
+      font-weight: 600;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--tan);
+      color: rgba(7,59,76,0.6);
       margin-top: 4px;
     }
 
     /* ── CURRENTLY BREWING ── */
     .currently-section {
-      padding: 80px 3rem;
+      padding: 64px 3rem;
       max-width: 1200px;
       margin: 0 auto;
     }
 
-    .section-label {
+    .section-eyebrow {
       font-size: 11px;
-      letter-spacing: 0.18em;
+      font-weight: 700;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--warm-gray);
-      margin-bottom: 2rem;
+      color: var(--muted);
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 20px;
+      height: 2px;
+      background: var(--pink);
+      border-radius: 2px;
     }
 
     .currently-card {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
+      grid-template-columns: 1fr 280px;
+      gap: 3rem;
       align-items: center;
-      background: var(--off-white);
-      padding: 3rem;
-      border-radius: 2px;
+      background: var(--navy);
+      padding: 2.5rem 3rem;
+      border-radius: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .currently-card::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 200px; height: 200px;
+      background: var(--teal);
+      border-radius: 50%;
+      opacity: 0.08;
+    }
+
+    .currently-card::after {
+      content: '';
+      position: absolute;
+      bottom: -40px; left: 40%;
+      width: 140px; height: 140px;
+      background: var(--pink);
+      border-radius: 50%;
+      opacity: 0.07;
     }
 
     .currently-badge {
-      display: inline-block;
-      background: var(--espresso);
-      color: var(--cream);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--teal);
+      color: var(--navy);
       font-size: 10px;
-      letter-spacing: 0.15em;
+      font-weight: 700;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       padding: 5px 12px;
-      border-radius: 1px;
-      margin-bottom: 1.5rem;
+      border-radius: 20px;
+      margin-bottom: 1.25rem;
     }
 
+    .currently-badge::before { content: '●'; font-size: 8px; }
+
     .currently-name {
-      font-family: 'open sans', sans-serif;
-      font-size: 40px;
-      font-weight: 300;
+      font-size: 32px;
+      font-weight: 800;
       line-height: 1.1;
-      color: var(--espresso);
-      margin-bottom: 0.5rem;
+      color: var(--white);
+      margin-bottom: 4px;
+      letter-spacing: -0.02em;
     }
 
     .currently-roaster {
       font-size: 13px;
+      font-weight: 600;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--warm-gray);
-      margin-bottom: 1.5rem;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 1.25rem;
     }
 
     .currently-notes-text {
-      font-size: 15px;
-      color: var(--mid);
-      font-style: italic;
-      font-family: 'open sans', sans-serif;
-      font-size: 20px;
+      font-size: 16px;
       font-weight: 300;
-      line-height: 1.5;
-      margin-bottom: 1.5rem;
+      font-style: italic;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
     }
 
-    .brew-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .brew-tags { display: flex; flex-wrap: wrap; gap: 6px; }
 
     .brew-tag {
       font-size: 11px;
-      letter-spacing: 0.08em;
+      font-weight: 600;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
-      padding: 5px 12px;
-      border: 1px solid var(--tan);
-      color: var(--mid);
-      border-radius: 1px;
+      padding: 4px 12px;
+      border: 1.5px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.6);
+      border-radius: 20px;
     }
 
     .bag-placeholder-large {
       width: 100%;
       aspect-ratio: 3/4;
-      max-height: 340px;
-      background: var(--cream);
+      max-height: 300px;
+      background: rgba(255,255,255,0.06);
+      border: 2px dashed rgba(255,255,255,0.15);
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 2px;
+      border-radius: 12px;
       overflow: hidden;
+      position: relative;
+      z-index: 1;
     }
 
-    .bag-placeholder-large img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+    .bag-placeholder-large img { width: 100%; height: 100%; object-fit: cover; }
+    .bag-placeholder-large .bag-icon { font-size: 56px; opacity: 0.25; }
 
-    .bag-placeholder-large .bag-icon {
-      font-size: 64px;
-      opacity: 0.4;
-    }
-
-    /* ── FILTERS ── */
+    /* ── FILTERS + JOURNAL ── */
     .filters-section {
-      padding: 60px 3rem 0;
+      padding: 48px 3rem 0;
       max-width: 1200px;
       margin: 0 auto;
     }
 
+    .section-title {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: -0.02em;
+      margin-bottom: 1.25rem;
+    }
+
     .filters-row {
       display: flex;
-      gap: 1rem;
+      gap: 8px;
       flex-wrap: wrap;
       align-items: center;
-      border-bottom: 1px solid var(--cream);
-      padding-bottom: 1.5rem;
-      margin-bottom: 3rem;
+      margin-bottom: 2rem;
     }
-
-    .filter-group { display: flex; gap: 6px; }
 
     .filter-btn {
-      padding: 7px 16px;
-      border: 1px solid var(--cream);
+      padding: 8px 18px;
+      border-radius: 20px;
+      border: 2px solid var(--border);
       background: transparent;
-      font-family: 'Jost', sans-sans-serif;
+      font-family: 'Open Sans', sans-serif;
       font-size: 12px;
-      letter-spacing: 0.08em;
-      color: var(--mid);
-      cursor: pointer;
-      transition: all 0.2s;
-      border-radius: 1px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.18s;
     }
 
-    .filter-btn:hover { border-color: var(--tan); color: var(--dark); }
-    .filter-btn.active { background: var(--espresso); color: var(--white); border-color: var(--espresso); }
+    .filter-btn:hover { border-color: var(--blue); color: var(--blue); }
 
-    .filter-divider {
-      width: 1px;
-      height: 24px;
-      background: var(--cream);
-      margin: 0 0.5rem;
-    }
+    .filter-btn.active.verdict-all   { background: var(--navy);  border-color: var(--navy);  color: white; }
+    .filter-btn.active.verdict-loved { background: var(--teal);  border-color: var(--teal);  color: var(--navy); }
+    .filter-btn.active.verdict-liked { background: var(--blue);  border-color: var(--blue);  color: white; }
+    .filter-btn.active.verdict-meh   { background: var(--yellow);border-color: var(--yellow);color: var(--navy); }
+    .filter-btn.active.verdict-nope  { background: var(--pink);  border-color: var(--pink);  color: white; }
+    .filter-btn.active.brew-active   { background: var(--blue);  border-color: var(--blue);  color: white; }
+
+    .filter-divider { width: 1px; height: 28px; background: var(--border); margin: 0 4px; }
 
     /* ── GRID ── */
     .journal-section {
@@ -302,113 +371,134 @@
 
     .journal-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 2px;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
     }
 
     .coffee-card {
       background: var(--white);
-      border: 1px solid var(--cream);
+      border: 2px solid var(--border);
+      border-radius: 16px;
       cursor: pointer;
-      transition: all 0.25s;
-      position: relative;
+      transition: all 0.22s;
       overflow: hidden;
+      position: relative;
     }
 
-    .coffee-card:hover { border-color: var(--tan); z-index: 1; }
-    .coffee-card:hover .card-img-wrap { transform: scale(1.02); }
+    .coffee-card:hover {
+      border-color: var(--blue);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(7,59,76,0.1);
+    }
+
+    .card-verdict-bar {
+      height: 5px;
+      width: 100%;
+    }
+
+    .card-verdict-bar.loved { background: var(--teal); }
+    .card-verdict-bar.liked { background: var(--blue); }
+    .card-verdict-bar.meh   { background: var(--yellow); }
+    .card-verdict-bar.nope  { background: var(--pink); }
 
     .card-img-wrap {
       width: 100%;
-      height: 200px;
-      background: var(--off-white);
+      height: 180px;
+      background: var(--light);
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      transition: transform 0.4s ease;
     }
 
     .card-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
-    .card-emoji { font-size: 48px; opacity: 0.35; }
+    .card-emoji { font-size: 52px; opacity: 0.25; }
 
-    .card-body { padding: 1.25rem; }
+    .card-body { padding: 1.1rem 1.1rem 0.75rem; }
 
     .card-meta {
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 0.75rem;
+      align-items: center;
+      margin-bottom: 6px;
     }
 
     .card-origin {
       font-size: 10px;
-      letter-spacing: 0.14em;
+      font-weight: 700;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--warm-gray);
+      color: var(--muted);
     }
 
-    .verdict-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      flex-shrink: 0;
-      margin-top: 2px;
+    .verdict-pill-sm {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 20px;
     }
 
-    .verdict-dot.loved { background: var(--green-ok); }
-    .verdict-dot.liked { background: var(--blue-like); }
-    .verdict-dot.meh { background: var(--tan); }
-    .verdict-dot.nope { background: var(--red-no); }
+    .verdict-pill-sm.loved { background: #D0FBF0; color: #028C68; }
+    .verdict-pill-sm.liked { background: #D6EEF7; color: #0B6080; }
+    .verdict-pill-sm.meh   { background: #FFF5D6; color: #8A6800; }
+    .verdict-pill-sm.nope  { background: #FFE0E8; color: #9E1C3A; }
 
     .card-name {
-      font-family: 'open sans', sans-serif;
-      font-size: 22px;
-      font-weight: 400;
-      color: var(--espresso);
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--navy);
       line-height: 1.2;
-      margin-bottom: 3px;
+      margin-bottom: 2px;
+      letter-spacing: -0.01em;
     }
 
     .card-roaster {
       font-size: 11px;
+      font-weight: 600;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--warm-gray);
-      margin-bottom: 1rem;
+      color: var(--muted);
+      margin-bottom: 10px;
     }
 
     .card-tasting-notes {
       display: flex;
       flex-wrap: wrap;
-      gap: 5px;
-      margin-bottom: 1rem;
+      gap: 4px;
+      margin-bottom: 10px;
     }
 
     .note-chip {
       font-size: 10px;
-      letter-spacing: 0.06em;
+      font-weight: 600;
+      letter-spacing: 0.04em;
       padding: 3px 9px;
-      background: var(--off-white);
-      color: var(--mid);
-      border-radius: 1px;
+      background: var(--light);
+      color: var(--blue);
+      border-radius: 20px;
+      border: 1px solid var(--border);
     }
 
     .card-footer {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-top: 1rem;
-      border-top: 1px solid var(--cream);
+      padding: 10px 1.1rem;
+      background: var(--light);
+      border-top: 1px solid var(--border);
     }
 
-    .stars { color: var(--accent-light); font-size: 13px; letter-spacing: 2px; }
+    .stars { color: var(--yellow); font-size: 14px; letter-spacing: 1px; }
+    .stars .empty { color: var(--border); }
 
-    .card-brew-methods {
+    .card-brew-pill {
       font-size: 10px;
-      letter-spacing: 0.08em;
-      color: var(--warm-gray);
+      font-weight: 700;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
+      color: var(--muted);
     }
 
     /* ── MODAL ── */
@@ -416,219 +506,217 @@
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(26, 20, 16, 0.7);
+      background: rgba(7,59,76,0.75);
       z-index: 200;
       align-items: center;
       justify-content: center;
       padding: 2rem;
-      backdrop-filter: blur(4px);
+      backdrop-filter: blur(6px);
     }
 
     .modal-overlay.open { display: flex; }
 
     .modal {
       background: var(--white);
-      max-width: 780px;
+      max-width: 760px;
       width: 100%;
       max-height: 90vh;
       overflow-y: auto;
-      border-radius: 2px;
+      border-radius: 20px;
     }
+
+    .modal-verdict-strip { height: 6px; border-radius: 20px 20px 0 0; }
+    .modal-verdict-strip.loved { background: var(--teal); }
+    .modal-verdict-strip.liked { background: var(--blue); }
+    .modal-verdict-strip.meh   { background: var(--yellow); }
+    .modal-verdict-strip.nope  { background: var(--pink); }
 
     .modal-header {
       display: grid;
       grid-template-columns: 200px 1fr;
-      gap: 0;
     }
 
     .modal-img {
       width: 200px;
-      height: 240px;
-      background: var(--off-white);
+      height: 220px;
+      background: var(--light);
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-shrink: 0;
       overflow: hidden;
+      flex-shrink: 0;
     }
 
     .modal-img img { width: 100%; height: 100%; object-fit: cover; }
-    .modal-img-emoji { font-size: 64px; opacity: 0.3; }
+    .modal-img-emoji { font-size: 60px; opacity: 0.2; }
 
     .modal-header-text {
-      padding: 2rem;
-      background: var(--espresso);
-      color: var(--cream);
+      padding: 1.75rem;
+      background: var(--navy);
     }
 
     .modal-origin-label {
       font-size: 10px;
-      letter-spacing: 0.18em;
+      font-weight: 700;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--tan);
-      margin-bottom: 0.75rem;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 6px;
     }
 
     .modal-name {
-      font-family: 'open sans', sans-serif;
-      font-size: 32px;
-      font-weight: 300;
-      line-height: 1.1;
+      font-size: 26px;
+      font-weight: 800;
       color: var(--white);
-      margin-bottom: 0.25rem;
+      line-height: 1.15;
+      margin-bottom: 4px;
+      letter-spacing: -0.02em;
     }
 
     .modal-roaster {
-      font-size: 12px;
+      font-size: 11px;
+      font-weight: 700;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--tan);
+      color: rgba(255,255,255,0.4);
     }
 
-    .modal-body { padding: 2rem; }
+    .modal-close {
+      background: rgba(255,255,255,0.12);
+      border: none;
+      color: rgba(255,255,255,0.7);
+      cursor: pointer;
+      font-size: 18px;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+
+    .modal-close:hover { background: var(--pink); color: white; }
+
+    .modal-body { padding: 1.75rem; }
 
     .modal-row {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
       margin-bottom: 1.5rem;
     }
 
     .modal-field-label {
       font-size: 10px;
+      font-weight: 700;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--warm-gray);
-      margin-bottom: 6px;
+      color: var(--muted);
+      margin-bottom: 4px;
     }
 
     .modal-field-value {
       font-size: 15px;
-      color: var(--dark);
+      font-weight: 600;
+      color: var(--navy);
     }
 
     .modal-notes-text {
-      font-family: 'open sans', sans-serif;
-      font-size: 19px;
+      font-size: 16px;
       font-weight: 300;
       font-style: italic;
-      color: var(--mid);
-      line-height: 1.5;
-      padding: 1.5rem;
-      background: var(--off-white);
-      border-left: 3px solid var(--accent-light);
+      color: var(--muted);
+      line-height: 1.6;
+      padding: 1.25rem 1.5rem;
+      background: var(--light);
+      border-left: 4px solid var(--teal);
+      border-radius: 0 8px 8px 0;
       margin-bottom: 1.5rem;
     }
 
     .modal-flavor-chips {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 6px;
       margin-bottom: 1.5rem;
     }
 
     .modal-flavor-chip {
       padding: 5px 14px;
-      border: 1px solid var(--tan);
+      background: var(--light);
+      border: 1.5px solid var(--border);
       font-size: 12px;
-      letter-spacing: 0.06em;
-      color: var(--mid);
+      font-weight: 600;
+      color: var(--blue);
       border-radius: 20px;
     }
 
     .modal-footer {
-      padding: 1.25rem 2rem;
-      border-top: 1px solid var(--cream);
+      padding: 1rem 1.75rem;
+      border-top: 1px solid var(--border);
       display: flex;
       justify-content: space-between;
       align-items: center;
+      background: var(--light);
+      border-radius: 0 0 20px 20px;
     }
 
-    .verdict-pill {
-      font-size: 11px;
+    .verdict-pill-lg {
+      font-size: 12px;
+      font-weight: 700;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      padding: 5px 14px;
+      padding: 6px 16px;
       border-radius: 20px;
-      font-weight: 400;
     }
 
-    .verdict-pill.loved { background: #EAF3EE; color: var(--green-ok); }
-    .verdict-pill.liked { background: #EAF0F7; color: var(--blue-like); }
-    .verdict-pill.meh { background: var(--off-white); color: var(--warm-gray); }
-    .verdict-pill.nope { background: #F5EAEA; color: var(--red-no); }
+    .verdict-pill-lg.loved { background: #D0FBF0; color: #028C68; }
+    .verdict-pill-lg.liked { background: #D6EEF7; color: #0B6080; }
+    .verdict-pill-lg.meh   { background: #FFF5D6; color: #8A6800; }
+    .verdict-pill-lg.nope  { background: #FFE0E8; color: #9E1C3A; }
 
-    .modal-close {
-      background: none;
-      border: none;
-      font-size: 24px;
-      color: var(--warm-gray);
-      cursor: pointer;
-      padding: 0.5rem;
-      line-height: 1;
-      transition: color 0.2s;
-    }
-
-    .modal-close:hover { color: var(--espresso); }
-
-    /* ── WORLD MAP ── */
+    /* ── MAP ── */
     .map-section {
-      padding: 80px 3rem;
-      background: var(--off-white);
+      background: var(--navy);
+      padding: 64px 3rem;
     }
 
     .map-inner { max-width: 1200px; margin: 0 auto; }
 
-    .map-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      margin-bottom: 3rem;
-    }
+    .map-section .section-eyebrow { color: rgba(255,255,255,0.4); }
+    .map-section .section-eyebrow::before { background: var(--teal); }
 
-    .section-title {
-      font-family: 'open sans', sans-serif;
-      font-size: 36px;
-      font-weight: 300;
-      color: var(--espresso);
-    }
+    .map-section .section-title { color: var(--white); margin-bottom: 2rem; }
 
-    #world-map {
-      width: 100%;
-      border-radius: 2px;
-      overflow: hidden;
-    }
+    #world-map { border-radius: 12px; overflow: hidden; }
 
     /* ── FLAVOR WHEEL ── */
     .wheel-section {
-      padding: 80px 3rem;
+      padding: 64px 3rem;
       max-width: 1200px;
       margin: 0 auto;
     }
 
     .wheel-layout {
       display: grid;
-      grid-template-columns: 1fr 340px;
+      grid-template-columns: 1fr 320px;
       gap: 4rem;
       align-items: start;
     }
 
     #flavor-wheel-svg { width: 100%; max-width: 480px; }
 
-    .wheel-sidebar {}
-
     .wheel-sidebar h3 {
-      font-family: 'open sans', sans-serif;
-      font-size: 28px;
-      font-weight: 300;
-      color: var(--espresso);
-      margin-bottom: 0.5rem;
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
     }
 
     .wheel-sidebar p {
       font-size: 14px;
-      color: var(--warm-gray);
-      margin-bottom: 1.5rem;
+      color: var(--muted);
+      margin-bottom: 1.25rem;
       line-height: 1.6;
     }
 
@@ -637,80 +725,93 @@
       flex-wrap: wrap;
       gap: 6px;
       margin-bottom: 1.5rem;
-      min-height: 40px;
+      min-height: 36px;
     }
 
     .selected-note {
       padding: 5px 12px;
-      background: var(--espresso);
-      color: var(--cream);
+      background: var(--navy);
+      color: var(--white);
       font-size: 11px;
+      font-weight: 700;
       letter-spacing: 0.06em;
       border-radius: 20px;
       display: flex;
       align-items: center;
       gap: 6px;
       cursor: pointer;
+      transition: background 0.15s;
     }
 
-    .selected-note:hover { background: var(--accent); }
+    .selected-note:hover { background: var(--pink); }
 
     .wheel-coffees h4 {
-      font-size: 11px;
+      font-size: 10px;
+      font-weight: 700;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--warm-gray);
+      color: var(--muted);
       margin-bottom: 1rem;
     }
 
     .wheel-match {
       padding: 0.75rem 0;
-      border-bottom: 1px solid var(--cream);
+      border-bottom: 1px solid var(--border);
       cursor: pointer;
       transition: color 0.2s;
     }
 
-    .wheel-match:hover { color: var(--accent); }
+    .wheel-match:hover .wheel-match-name { color: var(--blue); }
 
     .wheel-match-name {
-      font-family: 'open sans', sans-serif;
-      font-size: 17px;
-      color: var(--espresso);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--navy);
+      transition: color 0.2s;
     }
 
     .wheel-match-notes {
       font-size: 12px;
-      color: var(--warm-gray);
+      color: var(--muted);
       margin-top: 2px;
     }
 
     /* ── FOOTER ── */
     footer {
-      background: var(--espresso);
-      color: var(--tan);
-      padding: 3rem;
+      background: var(--navy);
+      color: rgba(255,255,255,0.4);
+      padding: 2.5rem 3rem;
       text-align: center;
+      border-top: 4px solid var(--yellow);
     }
 
-    footer p { font-size: 13px; letter-spacing: 0.06em; }
-    footer em { font-style: italic; color: var(--accent-light); }
+    footer p { font-size: 13px; font-weight: 600; letter-spacing: 0.06em; }
+    footer span { color: var(--teal); }
 
-    /* ── UTILITY ── */
     .hidden { display: none !important; }
 
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .coffee-card { animation: fadeUp 0.35s ease both; }
+
     @media (max-width: 768px) {
-      nav { padding: 0 1.5rem; }
+      nav { padding: 0 1.25rem; }
       .nav-links { display: none; }
-      .hero { padding: 120px 1.5rem 60px; }
+      .hero { padding: 100px 1.25rem 56px; }
+      .hero::after { display: none; }
       .stats-inner { grid-template-columns: repeat(2, 1fr); }
       .currently-card { grid-template-columns: 1fr; }
-      .filters-section, .journal-section { padding-left: 1.5rem; padding-right: 1.5rem; }
-      .map-section { padding: 60px 1.5rem; }
-      .wheel-section { padding: 60px 1.5rem; }
+      .bag-placeholder-large { max-height: 200px; }
+      .filters-section, .journal-section { padding-left: 1.25rem; padding-right: 1.25rem; }
+      .currently-section { padding: 40px 1.25rem; }
+      .map-section, .wheel-section { padding: 48px 1.25rem; }
       .wheel-layout { grid-template-columns: 1fr; }
       .modal-header { grid-template-columns: 1fr; }
-      .modal-img { width: 100%; height: 180px; }
-      .modal-row { grid-template-columns: 1fr; gap: 1rem; }
+      .modal-img { width: 100%; height: 160px; }
+      .modal-row { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -718,7 +819,7 @@
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">my <em>coffee</em> journal</div>
+  <div class="nav-logo">my <span>coffee</span> journal</div>
   <ul class="nav-links">
     <li><a href="#journal">Journal</a></li>
     <li><a href="#map">Origins</a></li>
@@ -728,9 +829,11 @@
 
 <!-- HERO -->
 <section class="hero">
-  <p class="hero-eyebrow">A personal log</p>
-  <h1>Every bag,<br><em>remembered.</em></h1>
-  <p class="hero-sub">Tasting notes, origins, verdicts — a record of the coffees that have passed through the grinder.</p>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">☕ A personal log</div>
+    <h1>Every bag,<br><span class="accent">every sip,</span><br><span class="accent2">remembered.</span></h1>
+    <p class="hero-sub">Tasting notes, origins, verdicts — a living record of every coffee that's passed through the grinder.</p>
+  </div>
 </section>
 
 <!-- STATS BAR -->
@@ -757,9 +860,9 @@
 
 <!-- CURRENTLY BREWING -->
 <section class="currently-section" id="currently">
-  <p class="section-label">In the grinder right now</p>
+  <div class="section-eyebrow">In the grinder right now</div>
   <div class="currently-card" id="currently-card">
-    <div>
+    <div style="position:relative;z-index:1;">
       <div class="currently-badge">Currently Brewing</div>
       <div class="currently-name" id="c-name">—</div>
       <div class="currently-roaster" id="c-roaster">—</div>
@@ -772,20 +875,17 @@
   </div>
 </section>
 
-<!-- FILTERS + JOURNAL GRID -->
+<!-- FILTERS + JOURNAL -->
 <section class="filters-section" id="journal">
-  <div class="filters-row">
-    <div class="filter-group" id="verdict-filters">
-      <button class="filter-btn active" data-filter="verdict" data-value="all">All</button>
-      <button class="filter-btn" data-filter="verdict" data-value="loved">Loved</button>
-      <button class="filter-btn" data-filter="verdict" data-value="liked">Liked</button>
-      <button class="filter-btn" data-filter="verdict" data-value="meh">Meh</button>
-      <button class="filter-btn" data-filter="verdict" data-value="nope">Nope</button>
-    </div>
+  <div class="section-title">The Journal</div>
+  <div class="filters-row" id="all-filters">
+    <button class="filter-btn active verdict-all" data-filter="verdict" data-value="all">All</button>
+    <button class="filter-btn verdict-loved" data-filter="verdict" data-value="loved">❤ Loved</button>
+    <button class="filter-btn verdict-liked" data-filter="verdict" data-value="liked">👍 Liked</button>
+    <button class="filter-btn verdict-meh"   data-filter="verdict" data-value="meh">😐 Meh</button>
+    <button class="filter-btn verdict-nope"  data-filter="verdict" data-value="nope">👎 Nope</button>
     <div class="filter-divider"></div>
-    <div class="filter-group" id="brew-filters">
-      <button class="filter-btn active" data-filter="brew" data-value="all">All Methods</button>
-    </div>
+    <div id="brew-filters" style="display:flex;gap:8px;flex-wrap:wrap;"></div>
   </div>
 </section>
 
@@ -796,22 +896,16 @@
 <!-- WORLD MAP -->
 <section class="map-section" id="map">
   <div class="map-inner">
-    <div class="map-header">
-      <div>
-        <p class="section-label">Origins explored</p>
-        <div class="section-title">Where the beans<br>come from</div>
-      </div>
-    </div>
+    <div class="section-eyebrow">Origins explored</div>
+    <div class="section-title">Where the beans come from</div>
     <div id="world-map"></div>
   </div>
 </section>
 
 <!-- FLAVOR WHEEL -->
 <section class="wheel-section" id="wheel">
-  <p class="section-label">Flavor explorer</p>
-  <div style="margin-bottom:2rem;">
-    <div class="section-title">Find coffees by<br>flavor profile</div>
-  </div>
+  <div class="section-eyebrow">Flavor explorer</div>
+  <div class="section-title" style="margin-bottom:2rem;">Find coffees by flavor</div>
   <div class="wheel-layout">
     <div>
       <svg id="flavor-wheel-svg" viewBox="0 0 480 480" xmlns="http://www.w3.org/2000/svg"></svg>
@@ -820,7 +914,7 @@
       <h3>Selected Notes</h3>
       <p>Click slices on the wheel to filter your journal by tasting note.</p>
       <div class="selected-notes" id="selected-notes">
-        <span style="font-size:13px;color:var(--warm-gray);align-self:center;">Nothing selected yet</span>
+        <span style="font-size:13px;color:var(--muted);">Nothing selected yet</span>
       </div>
       <div class="wheel-coffees">
         <h4>Matching Coffees</h4>
@@ -833,12 +927,13 @@
 <!-- MODAL -->
 <div class="modal-overlay" id="modal" onclick="closeModal(event)">
   <div class="modal">
+    <div class="modal-verdict-strip" id="modal-strip"></div>
     <div class="modal-header">
       <div class="modal-img" id="modal-img">
         <div class="modal-img-emoji">☕</div>
       </div>
       <div class="modal-header-text">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;">
           <div>
             <div class="modal-origin-label" id="modal-origin">—</div>
             <div class="modal-name" id="modal-name">—</div>
@@ -851,46 +946,33 @@
     <div class="modal-body">
       <div class="modal-notes-text" id="modal-roaster-notes">—</div>
       <div class="modal-row">
-        <div>
-          <div class="modal-field-label">Process</div>
-          <div class="modal-field-value" id="modal-process">—</div>
-        </div>
-        <div>
-          <div class="modal-field-label">Roast Level</div>
-          <div class="modal-field-value" id="modal-roast">—</div>
-        </div>
-        <div>
-          <div class="modal-field-label">Brew Methods</div>
-          <div class="modal-field-value" id="modal-brew">—</div>
-        </div>
-        <div>
-          <div class="modal-field-label">Price Paid</div>
-          <div class="modal-field-value" id="modal-price">—</div>
-        </div>
+        <div><div class="modal-field-label">Process</div><div class="modal-field-value" id="modal-process">—</div></div>
+        <div><div class="modal-field-label">Roast Level</div><div class="modal-field-value" id="modal-roast">—</div></div>
+        <div><div class="modal-field-label">Brew Methods</div><div class="modal-field-value" id="modal-brew">—</div></div>
+        <div><div class="modal-field-label">Price Paid</div><div class="modal-field-value" id="modal-price">—</div></div>
       </div>
       <div class="modal-field-label" style="margin-bottom:8px;">Tasting Notes</div>
       <div class="modal-flavor-chips" id="modal-chips"></div>
-      <div class="modal-field-label" style="margin-bottom:8px;">My Notes</div>
-      <div style="font-size:14px;color:var(--mid);line-height:1.7;" id="modal-my-notes">—</div>
+      <div class="modal-field-label" style="margin-bottom:6px;">My Notes</div>
+      <div style="font-size:14px;color:var(--muted);line-height:1.7;" id="modal-my-notes">—</div>
     </div>
     <div class="modal-footer">
-      <div>
-        <span class="verdict-pill" id="modal-verdict-pill">—</span>
-        <span style="margin-left:12px;font-family:'open sans',sans-serif;font-size:18px;color:var(--accent-light);" id="modal-stars">—</span>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <span class="verdict-pill-lg" id="modal-verdict-pill">—</span>
+        <span style="font-size:16px;letter-spacing:2px;" id="modal-stars">—</span>
       </div>
-      <div style="font-size:11px;letter-spacing:0.08em;color:var(--warm-gray);text-transform:uppercase;" id="modal-date">—</div>
+      <div style="font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);" id="modal-date">—</div>
     </div>
   </div>
 </div>
 
 <!-- FOOTER -->
 <footer>
-  <p>my <em>coffee journal</em> &nbsp;·&nbsp; kept with care &nbsp;·&nbsp; <span id="footer-year"></span></p>
+  <p>my <span>coffee journal</span> &nbsp;·&nbsp; kept with care &nbsp;·&nbsp; <span id="footer-year"></span></p>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
 <script>
-// ── DATA ──
 let allCoffees = [];
 let activeVerdictFilter = 'all';
 let activeBrewFilter = 'all';
@@ -900,7 +982,6 @@ async function loadData() {
     const res = await fetch('coffees.json');
     allCoffees = await res.json();
   } catch(e) {
-    // fallback sample data if fetch fails (e.g. local file open)
     allCoffees = [
       { id:1, name:"Yirgacheffe Natural", roaster:"Onyx Coffee Lab", origin:"Ethiopia", region:"Yirgacheffe", lat:6.15, lng:38.2, process:"Natural", roastLevel:"Light", brewMethods:["Pour Over","AeroPress"], rating:5, verdict:"loved", wouldBuyAgain:true, price:22, tastingNotes:["Blueberry","Dark Chocolate","Jasmine","Stone Fruit"], roasterNotes:"Expect a fruit-forward, wine-like cup with incredible complexity.", dateAdded:"2025-03-10", currentlyBrewing:true, bagPhotoUrl:"", notes:"My favorite so far." },
       { id:2, name:"Huila Washed", roaster:"Intelligentsia", origin:"Colombia", region:"Huila", lat:2.53, lng:-75.53, process:"Washed", roastLevel:"Medium-Light", brewMethods:["Drip","Pour Over"], rating:4, verdict:"liked", wouldBuyAgain:true, price:18, tastingNotes:["Brown Sugar","Red Apple","Citrus","Caramel"], roasterNotes:"Bright and balanced with a smooth, sweet finish.", dateAdded:"2025-02-14", currentlyBrewing:false, bagPhotoUrl:"", notes:"Great morning coffee." },
@@ -922,7 +1003,6 @@ function init() {
   document.getElementById('footer-year').textContent = new Date().getFullYear();
 }
 
-// ── STATS ──
 function renderStats() {
   document.getElementById('stat-total').textContent = allCoffees.length;
   document.getElementById('stat-loved').textContent = allCoffees.filter(c => c.verdict === 'loved').length;
@@ -930,29 +1010,28 @@ function renderStats() {
   document.getElementById('stat-roasters').textContent = new Set(allCoffees.map(c => c.roaster)).size;
 }
 
-// ── CURRENTLY BREWING ──
 function renderCurrentlyBrewing() {
   const c = allCoffees.find(c => c.currentlyBrewing);
   if (!c) { document.querySelector('.currently-section').classList.add('hidden'); return; }
   document.getElementById('c-name').textContent = c.name;
   document.getElementById('c-roaster').textContent = c.roaster + ' · ' + c.origin;
   document.getElementById('c-notes').textContent = '"' + c.roasterNotes + '"';
-  const tags = document.getElementById('c-brew-tags');
-  tags.innerHTML = c.brewMethods.map(m => `<span class="brew-tag">${m}</span>`).join('');
-  if (c.bagPhotoUrl) {
-    document.getElementById('c-img').innerHTML = `<img src="${c.bagPhotoUrl}" alt="${c.name}" />`;
-  }
+  document.getElementById('c-brew-tags').innerHTML = c.brewMethods.map(m => `<span class="brew-tag">${m}</span>`).join('');
+  if (c.bagPhotoUrl) document.getElementById('c-img').innerHTML = `<img src="${c.bagPhotoUrl}" alt="${c.name}" />`;
 }
 
-// ── BREW FILTER BUTTONS ──
 function renderBrewFilters() {
   const methods = [...new Set(allCoffees.flatMap(c => c.brewMethods))].sort();
   const container = document.getElementById('brew-filters');
+  const allBtn = document.createElement('button');
+  allBtn.className = 'filter-btn active brew-active';
+  allBtn.dataset.filter = 'brew'; allBtn.dataset.value = 'all';
+  allBtn.textContent = 'All Methods';
+  container.appendChild(allBtn);
   methods.forEach(m => {
     const btn = document.createElement('button');
     btn.className = 'filter-btn';
-    btn.dataset.filter = 'brew';
-    btn.dataset.value = m;
+    btn.dataset.filter = 'brew'; btn.dataset.value = m;
     btn.textContent = m;
     container.appendChild(btn);
   });
@@ -962,10 +1041,15 @@ function renderBrewFilters() {
       const val = btn.dataset.value;
       if (type === 'verdict') {
         activeVerdictFilter = val;
-        document.querySelectorAll('[data-filter="verdict"]').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('[data-filter="verdict"]').forEach(b => {
+          b.classList.remove('active');
+        });
       } else {
         activeBrewFilter = val;
-        document.querySelectorAll('[data-filter="brew"]').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('[data-filter="brew"]').forEach(b => {
+          b.classList.remove('active', 'brew-active');
+        });
+        btn.classList.add('brew-active');
       }
       btn.classList.add('active');
       renderGrid();
@@ -973,7 +1057,6 @@ function renderBrewFilters() {
   });
 }
 
-// ── GRID ──
 function getFiltered() {
   return allCoffees.filter(c => {
     const vOk = activeVerdictFilter === 'all' || c.verdict === activeVerdictFilter;
@@ -982,47 +1065,46 @@ function getFiltered() {
   });
 }
 
-function stars(n) {
-  return '★'.repeat(n) + '☆'.repeat(5-n);
+function starsHtml(n) {
+  return '<span style="color:var(--yellow)">' + '★'.repeat(n) + '</span><span class="empty" style="color:var(--border)">' + '★'.repeat(5-n) + '</span>';
 }
 
 function renderGrid() {
   const grid = document.getElementById('journal-grid');
   const data = getFiltered();
   if (data.length === 0) {
-    grid.innerHTML = `<div style="grid-column:1/-1;padding:4rem 0;text-align:center;color:var(--warm-gray);font-size:15px;">No coffees match this filter.</div>`;
+    grid.innerHTML = `<div style="grid-column:1/-1;padding:4rem 0;text-align:center;color:var(--muted);font-size:15px;font-weight:600;">No coffees match this filter.</div>`;
     return;
   }
-  grid.innerHTML = data.map(c => `
-    <div class="coffee-card" onclick="openModal(${c.id})">
+  grid.innerHTML = data.map((c, i) => `
+    <div class="coffee-card" onclick="openModal(${c.id})" style="animation-delay:${i * 0.04}s">
+      <div class="card-verdict-bar ${c.verdict}"></div>
       <div class="card-img-wrap">
-        ${c.bagPhotoUrl
-          ? `<img src="${c.bagPhotoUrl}" alt="${c.name}" />`
-          : `<div class="card-emoji">☕</div>`}
+        ${c.bagPhotoUrl ? `<img src="${c.bagPhotoUrl}" alt="${c.name}" />` : `<div class="card-emoji">☕</div>`}
       </div>
       <div class="card-body">
         <div class="card-meta">
-          <div class="card-origin">${c.origin} · ${c.region}</div>
-          <div class="verdict-dot ${c.verdict}"></div>
+          <div class="card-origin">${c.origin}</div>
+          <span class="verdict-pill-sm ${c.verdict}">${c.verdict}</span>
         </div>
         <div class="card-name">${c.name}</div>
         <div class="card-roaster">${c.roaster}</div>
         <div class="card-tasting-notes">
           ${c.tastingNotes.slice(0,3).map(n => `<span class="note-chip">${n}</span>`).join('')}
         </div>
-        <div class="card-footer">
-          <div class="stars">${stars(c.rating)}</div>
-          <div class="card-brew-methods">${c.brewMethods[0]}</div>
-        </div>
+      </div>
+      <div class="card-footer">
+        <div class="stars">${starsHtml(c.rating)}</div>
+        <div class="card-brew-pill">${c.brewMethods[0]}</div>
       </div>
     </div>
   `).join('');
 }
 
-// ── MODAL ──
 function openModal(id) {
   const c = allCoffees.find(c => c.id === id);
   if (!c) return;
+  document.getElementById('modal-strip').className = 'modal-verdict-strip ' + c.verdict;
   document.getElementById('modal-origin').textContent = c.origin + ' · ' + c.region;
   document.getElementById('modal-name').textContent = c.name;
   document.getElementById('modal-roaster').textContent = c.roaster;
@@ -1034,9 +1116,8 @@ function openModal(id) {
   document.getElementById('modal-my-notes').textContent = c.notes || '—';
   document.getElementById('modal-date').textContent = c.dateAdded;
   const vp = document.getElementById('modal-verdict-pill');
-  vp.textContent = c.verdict;
-  vp.className = 'verdict-pill ' + c.verdict;
-  document.getElementById('modal-stars').textContent = stars(c.rating);
+  vp.textContent = c.verdict; vp.className = 'verdict-pill-lg ' + c.verdict;
+  document.getElementById('modal-stars').innerHTML = starsHtml(c.rating);
   document.getElementById('modal-chips').innerHTML = c.tastingNotes.map(n => `<span class="modal-flavor-chip">${n}</span>`).join('');
   const mi = document.getElementById('modal-img');
   mi.innerHTML = c.bagPhotoUrl ? `<img src="${c.bagPhotoUrl}" alt="${c.name}" />` : `<div class="modal-img-emoji">☕</div>`;
@@ -1047,138 +1128,113 @@ function closeModal(e) {
   if (e.target.id === 'modal') document.getElementById('modal').classList.remove('open');
 }
 
-// ── MAP ──
+// MAP
 function renderMap() {
   const w = document.getElementById('world-map').offsetWidth || 900;
-  const h = Math.round(w * 0.52);
+  const h = Math.round(w * 0.5);
   const svg = d3.select('#world-map').append('svg')
-    .attr('width', '100%')
-    .attr('viewBox', `0 0 ${w} ${h}`)
-    .style('background', '#EDE9E3');
-
-  const projection = d3.geoNaturalEarth1()
-    .scale(w / 6.2)
-    .translate([w / 2, h / 2]);
-
+    .attr('width','100%').attr('viewBox',`0 0 ${w} ${h}`)
+    .style('background','#0A2D3A');
+  const projection = d3.geoNaturalEarth1().scale(w/6.4).translate([w/2, h/2]);
   const path = d3.geoPath().projection(projection);
+  const colors = { loved:'#06D6A0', liked:'#118AB2', meh:'#FFD166', nope:'#EF476F' };
 
   d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(world => {
     const countries = topojson.feature(world, world.objects.countries);
-    svg.append('g').selectAll('path')
-      .data(countries.features)
-      .join('path')
-      .attr('d', path)
-      .attr('fill', '#D4CBBC')
-      .attr('stroke', '#EDE9E3')
-      .attr('stroke-width', 0.5);
+    svg.append('g').selectAll('path').data(countries.features).join('path')
+      .attr('d', path).attr('fill','#0E3A4A').attr('stroke','#073B4C').attr('stroke-width', 0.7);
 
-    // Plot coffee origins
     allCoffees.forEach(c => {
       const [x, y] = projection([c.lng, c.lat]);
-      const g = svg.append('g').style('cursor', 'pointer').on('click', () => openModal(c.id));
-      g.append('circle').attr('cx', x).attr('cy', y).attr('r', 10)
-        .attr('fill', c.verdict === 'loved' ? '#4A7C59' : c.verdict === 'liked' ? '#4A6B8B' : c.verdict === 'meh' ? '#9E9388' : '#8B3A3A')
-        .attr('stroke', 'white').attr('stroke-width', 2).attr('opacity', 0.9);
-      g.append('text').attr('x', x).attr('y', y - 15)
-        .attr('text-anchor', 'middle')
-        .attr('font-family', 'Jost, sans-sans-serif')
-        .attr('font-size', '11px')
-        .attr('fill', '#2C2520')
+      if (!x || !y) return;
+      const g = svg.append('g').style('cursor','pointer').on('click', () => openModal(c.id));
+      g.append('circle').attr('cx',x).attr('cy',y).attr('r',12)
+        .attr('fill', colors[c.verdict] || '#118AB2')
+        .attr('stroke','rgba(255,255,255,0.3)').attr('stroke-width',2).attr('opacity',0.92);
+      g.append('text').attr('x',x).attr('y',y-17)
+        .attr('text-anchor','middle')
+        .attr('font-family','Open Sans, sans-serif').attr('font-size','10px').attr('font-weight','700')
+        .attr('fill','rgba(255,255,255,0.8)')
         .text(c.origin);
     });
 
-    // Legend
-    const legData = [{label:'Loved', color:'#4A7C59'},{label:'Liked', color:'#4A6B8B'},{label:'Meh', color:'#9E9388'},{label:'Nope', color:'#8B3A3A'}];
-    const leg = svg.append('g').attr('transform', `translate(16, ${h - 80})`);
-    legData.forEach((d, i) => {
-      leg.append('circle').attr('cx', 8).attr('cy', i * 18).attr('r', 5).attr('fill', d.color);
-      leg.append('text').attr('x', 20).attr('y', i * 18 + 4).attr('font-family', 'Jost, sans-sans-serif').attr('font-size', '11px').attr('fill', '#6B6259').text(d.label);
+    const legData = [{label:'Loved',color:'#06D6A0'},{label:'Liked',color:'#118AB2'},{label:'Meh',color:'#FFD166'},{label:'Nope',color:'#EF476F'}];
+    const leg = svg.append('g').attr('transform',`translate(16,${h-90})`);
+    legData.forEach((d,i) => {
+      leg.append('circle').attr('cx',8).attr('cy',i*20).attr('r',6).attr('fill',d.color);
+      leg.append('text').attr('x',22).attr('y',i*20+5)
+        .attr('font-family','Open Sans, sans-serif').attr('font-size','11px').attr('font-weight','600')
+        .attr('fill','rgba(255,255,255,0.6)').text(d.label);
     });
   }).catch(() => {
-    document.getElementById('world-map').innerHTML = '<p style="padding:2rem;color:var(--warm-gray);text-align:center;font-size:14px;">Map requires an internet connection to load.</p>';
+    document.getElementById('world-map').innerHTML = '<p style="padding:2rem;color:rgba(255,255,255,0.4);text-align:center;">Map requires an internet connection.</p>';
   });
 }
 
-// ── FLAVOR WHEEL ──
+// FLAVOR WHEEL
 const flavorCategories = [
-  { name: 'Fruity', color: '#C4834A', sub: ['Blueberry', 'Blackcurrant', 'Red Apple', 'Stone Fruit', 'Citrus', 'Grapefruit'] },
-  { name: 'Floral', color: '#8B6F5E', sub: ['Jasmine', 'Bergamot', 'Rose', 'Lavender'] },
-  { name: 'Sweet', color: '#B5854A', sub: ['Brown Sugar', 'Caramel', 'Honey', 'Vanilla'] },
-  { name: 'Nutty', color: '#7A6050', sub: ['Hazelnut', 'Almond', 'Walnut', 'Pecan'] },
-  { name: 'Chocolate', color: '#5C4033', sub: ['Dark Chocolate', 'Milk Chocolate', 'Cocoa', 'Mocha'] },
-  { name: 'Earthy', color: '#6B7A5C', sub: ['Earthy', 'Cedar', 'Herbal', 'Tomato'] },
-  { name: 'Spice', color: '#8B7355', sub: ['Cinnamon', 'Clove', 'Pepper', 'Cardamom'] },
+  { name:'Fruity',    color:'#EF476F', sub:['Blueberry','Blackcurrant','Red Apple','Stone Fruit','Citrus','Grapefruit'] },
+  { name:'Floral',    color:'#118AB2', sub:['Jasmine','Bergamot','Rose','Lavender'] },
+  { name:'Sweet',     color:'#FFD166', sub:['Brown Sugar','Caramel','Honey','Vanilla'] },
+  { name:'Nutty',     color:'#06D6A0', sub:['Hazelnut','Almond','Walnut','Pecan'] },
+  { name:'Chocolate', color:'#073B4C', sub:['Dark Chocolate','Milk Chocolate','Cocoa','Mocha'] },
+  { name:'Earthy',    color:'#0D6B52', sub:['Earthy','Cedar','Herbal','Tomato'] },
+  { name:'Spice',     color:'#8B4A6B', sub:['Cinnamon','Clove','Pepper','Cardamom'] },
 ];
 
 let selectedNotes = new Set();
 
 function renderFlavorWheel() {
   const svg = d3.select('#flavor-wheel-svg');
-  const size = 480;
-  const cx = size / 2, cy = size / 2;
-  const outerR = 210, innerR = 80;
-  const midR = (outerR + innerR) / 2;
+  const size = 480, cx = size/2, cy = size/2;
+  const outerR = 215, innerR = 80, midR = (outerR+innerR)/2;
   const n = flavorCategories.length;
 
   flavorCategories.forEach((cat, i) => {
-    const catStart = (i / n) * 2 * Math.PI - Math.PI / 2;
-    const catEnd = ((i + 1) / n) * 2 * Math.PI - Math.PI / 2;
+    const catStart = (i/n)*2*Math.PI - Math.PI/2;
+    const catEnd = ((i+1)/n)*2*Math.PI - Math.PI/2;
     const subN = cat.sub.length;
 
-    // Outer sub-slices
     cat.sub.forEach((note, j) => {
-      const a0 = catStart + (j / subN) * (catEnd - catStart);
-      const a1 = catStart + ((j + 1) / subN) * (catEnd - catStart);
-      const arc = d3.arc().innerRadius(midR).outerRadius(outerR).startAngle(a0).endAngle(a1).padAngle(0.012).cornerRadius(2);
-      const g = svg.append('g').style('cursor', 'pointer');
-      g.append('path').attr('d', arc).attr('transform', `translate(${cx},${cy})`)
-        .attr('fill', cat.color).attr('opacity', 0.65)
-        .attr('data-note', note)
-        .attr('class', 'sub-slice');
-
-      const mid = (a0 + a1) / 2;
-      const tr = (midR + outerR) / 2;
+      const a0 = catStart + (j/subN)*(catEnd-catStart);
+      const a1 = catStart + ((j+1)/subN)*(catEnd-catStart);
+      const arc = d3.arc().innerRadius(midR).outerRadius(outerR).startAngle(a0).endAngle(a1).padAngle(0.014).cornerRadius(3);
+      const g = svg.append('g').style('cursor','pointer');
+      g.append('path').attr('d',arc).attr('transform',`translate(${cx},${cy})`)
+        .attr('fill',cat.color).attr('opacity',0.6).attr('data-note',note).attr('class','sub-slice');
+      const mid = (a0+a1)/2, tr = (midR+outerR)/2;
       svg.append('text')
-        .attr('x', cx + tr * Math.sin(mid))
-        .attr('y', cy - tr * Math.cos(mid))
-        .attr('text-anchor', 'middle').attr('dominant-baseline', 'middle')
-        .attr('font-family', 'Jost, sans-sans-serif').attr('font-size', '9px')
-        .attr('fill', 'white').attr('pointer-events', 'none')
-        .text(note);
-
-      g.on('click', () => toggleNote(note, g, cat.color));
+        .attr('x', cx+tr*Math.sin(mid)).attr('y', cy-tr*Math.cos(mid))
+        .attr('text-anchor','middle').attr('dominant-baseline','middle')
+        .attr('font-family','Open Sans, sans-serif').attr('font-size','8.5px').attr('font-weight','700')
+        .attr('fill','white').attr('pointer-events','none').text(note);
+      g.on('click', () => toggleNote(note, g));
     });
 
-    // Inner category arc
-    const arc2 = d3.arc().innerRadius(innerR).outerRadius(midR - 4).startAngle(catStart).endAngle(catEnd).padAngle(0.016).cornerRadius(2);
-    svg.append('path').attr('d', arc2).attr('transform', `translate(${cx},${cy})`).attr('fill', cat.color).attr('opacity', 0.9);
-
-    const midA = (catStart + catEnd) / 2;
-    const tr2 = (innerR + midR) / 2;
+    const arc2 = d3.arc().innerRadius(innerR).outerRadius(midR-4).startAngle(catStart).endAngle(catEnd).padAngle(0.018).cornerRadius(3);
+    svg.append('path').attr('d',arc2).attr('transform',`translate(${cx},${cy})`).attr('fill',cat.color).attr('opacity',1);
+    const midA = (catStart+catEnd)/2, tr2 = (innerR+midR)/2;
     svg.append('text')
-      .attr('x', cx + tr2 * Math.sin(midA))
-      .attr('y', cy - tr2 * Math.cos(midA))
-      .attr('text-anchor', 'middle').attr('dominant-baseline', 'middle')
-      .attr('font-family', 'open sans, sans-serif').attr('font-size', '11px').attr('font-weight', '400')
-      .attr('fill', 'white').attr('pointer-events', 'none')
-      .text(cat.name);
+      .attr('x', cx+tr2*Math.sin(midA)).attr('y', cy-tr2*Math.cos(midA))
+      .attr('text-anchor','middle').attr('dominant-baseline','middle')
+      .attr('font-family','Open Sans, sans-serif').attr('font-size','10px').attr('font-weight','800')
+      .attr('fill','white').attr('pointer-events','none').text(cat.name);
   });
 
-  // Center circle
-  svg.append('circle').attr('cx', cx).attr('cy', cy).attr('r', innerR - 4).attr('fill', '#EDE9E3');
-  svg.append('text').attr('x', cx).attr('y', cy - 8).attr('text-anchor', 'middle')
-    .attr('font-family', 'open sans, sans-serif').attr('font-size', '15px').attr('fill', '#6B6259').text('tap to');
-  svg.append('text').attr('x', cx).attr('y', cy + 10).attr('text-anchor', 'middle')
-    .attr('font-family', 'open sans, sans-serif').attr('font-size', '15px').attr('fill', '#6B6259').text('explore');
+  svg.append('circle').attr('cx',cx).attr('cy',cy).attr('r',innerR-4).attr('fill','#F4FAFC');
+  svg.append('text').attr('x',cx).attr('y',cy-6).attr('text-anchor','middle')
+    .attr('font-family','Open Sans, sans-serif').attr('font-size','12px').attr('font-weight','700').attr('fill','#5A7A87').text('tap to');
+  svg.append('text').attr('x',cx).attr('y',cy+12).attr('text-anchor','middle')
+    .attr('font-family','Open Sans, sans-serif').attr('font-size','12px').attr('font-weight','700').attr('fill','#5A7A87').text('explore');
 }
 
-function toggleNote(note, g, color) {
+function toggleNote(note, g) {
   if (selectedNotes.has(note)) {
     selectedNotes.delete(note);
-    g.select('path').attr('opacity', 0.65).attr('stroke', 'none');
+    g.select('path').attr('opacity',0.6).attr('stroke','none');
   } else {
     selectedNotes.add(note);
-    g.select('path').attr('opacity', 1).attr('stroke', 'white').attr('stroke-width', 2);
+    g.select('path').attr('opacity',1).attr('stroke','white').attr('stroke-width',2.5);
   }
   updateWheelSidebar();
 }
@@ -1186,44 +1242,36 @@ function toggleNote(note, g, color) {
 function updateWheelSidebar() {
   const container = document.getElementById('selected-notes');
   if (selectedNotes.size === 0) {
-    container.innerHTML = '<span style="font-size:13px;color:var(--warm-gray);align-self:center;">Nothing selected yet</span>';
+    container.innerHTML = '<span style="font-size:13px;color:var(--muted);">Nothing selected yet</span>';
     document.getElementById('wheel-matches').innerHTML = '';
     return;
   }
   container.innerHTML = [...selectedNotes].map(n =>
     `<span class="selected-note" onclick="removeNote('${n}')">${n} ×</span>`
   ).join('');
-
   const matches = allCoffees.filter(c => c.tastingNotes.some(n => selectedNotes.has(n)));
   const matchEl = document.getElementById('wheel-matches');
-  if (matches.length === 0) {
-    matchEl.innerHTML = '<p style="font-size:13px;color:var(--warm-gray);">No matches in your journal.</p>';
-  } else {
-    matchEl.innerHTML = matches.map(c => `
+  matchEl.innerHTML = matches.length === 0
+    ? '<p style="font-size:13px;color:var(--muted);">No matches in your journal yet.</p>'
+    : matches.map(c => `
       <div class="wheel-match" onclick="openModal(${c.id})">
         <div class="wheel-match-name">${c.name}</div>
         <div class="wheel-match-notes">${c.tastingNotes.filter(n => selectedNotes.has(n)).join(', ')}</div>
-      </div>
-    `).join('');
-  }
+      </div>`).join('');
 }
 
 function removeNote(note) {
   selectedNotes.delete(note);
-  // Reset that slice visually
   d3.selectAll('.sub-slice').filter(function() {
     return d3.select(this).attr('data-note') === note;
-  }).attr('opacity', 0.65).attr('stroke', 'none');
+  }).attr('opacity',0.6).attr('stroke','none');
   updateWheelSidebar();
 }
 
-// ── TOPOJSON (for map) ──
 const topoScript = document.createElement('script');
 topoScript.src = 'https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js';
-topoScript.onload = () => {};
 document.head.appendChild(topoScript);
 
-// ── INIT ──
 loadData();
 </script>
 </body>
